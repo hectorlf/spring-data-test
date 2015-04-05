@@ -1,0 +1,157 @@
+apply plugin: 'war'
+apply plugin: 'eclipse-wtp'
+
+
+// project defs
+
+def entitiesBasePackage = 'test.model'
+
+
+configurations {
+   weave
+   metamodel
+   jettyRunner
+   jettyRuntimeClasspath
+}
+
+dependencies {
+   // some common dependencies are configured in the root build.gradle
+    
+   providedCompile 'commons-logging:commons-logging:'
+   providedCompile 'javax.servlet:javax.servlet-api:'
+
+   compile 'javax.inject:javax.inject:'
+   compile 'org.eclipse.persistence:javax.persistence:'
+   compile 'org.springframework:spring-webmvc:'
+   compile 'org.springframework:spring-tx:'
+   compile 'org.springframework:spring-orm:'
+   compile 'org.thymeleaf:thymeleaf-spring4:'
+   compile 'org.eclipse.persistence:org.eclipse.persistence.jpa:'
+    
+   runtime 'org.apache.bval:bval-jsr303:'
+   runtime 'org.aspectj:aspectjweaver:'
+
+   testCompile 'junit:junit:'
+   testCompile 'org.springframework:spring-test:'
+   testCompile 'org.hsqldb:hsqldb:'
+   testCompile 'org.mockito:mockito-core:'
+
+   weave 'org.eclipse.persistence:javax.persistence:'
+   weave 'org.eclipse.persistence:org.eclipse.persistence.jpa:'
+   
+   metamodel 'org.eclipse.persistence:javax.persistence:'
+   metamodel 'org.eclipse.persistence:org.eclipse.persistence.jpa:'
+   metamodel 'org.eclipse.persistence:org.eclipse.persistence.jpa.modelgen.processor:'
+   
+   jettyRunner 'org.eclipse.jetty:jetty-runner:9.2.9+'
+   jettyRuntimeClasspath 'org.apache.commons:commons-dbcp2:2.0.1'
+   jettyRuntimeClasspath 'org.hsqldb:hsqldb:'
+}
+
+compileJava {
+   destinationDir file("$buildDir/compiled-classes")
+}
+
+war {
+   from 'WebContent'
+   webInf { from 'WEB-INF' } // adds a file-set to the WEB-INF dir.
+}
+
+
+task processDdl(type: Copy) {
+   from "$rootDir/ddl"
+   into processResources.destinationDir
+}
+
+
+// jpa weaving
+
+task copyNonPersistentClasses(type: Copy, dependsOn: compileJava) {
+   from "$buildDir/compiled-classes"
+   into sourceSets.main.output.classesDir
+   exclude '**/' + entitiesBasePackage.replaceAll('\\.','/') + '/**'
+   includeEmptyDirs = false
+}
+task copyPersistentClasses(type: Copy, dependsOn: compileJava) {
+   from "$buildDir/compiled-classes"
+   into "$buildDir/unwoven-persistent-classes"
+   include '**/' + entitiesBasePackage.replaceAll('\\.','/') + '/**'
+   includeEmptyDirs = false
+}
+task weaveJpaEntities(type: JavaExec) {
+   main = 'org.eclipse.persistence.tools.weaving.jpa.StaticWeave'
+   classpath configurations.weave.incoming.files
+   args '-persistenceinfo'
+   args processResources.destinationDir.absolutePath
+   args '-classpath'
+   args configurations.compile.incoming.files.asPath
+   args '-loglevel'
+   args 'INFO'
+   args copyPersistentClasses.destinationDir.absolutePath
+   args sourceSets.main.output.classesDir.absolutePath
+   
+   inputs.files fileTree(copyPersistentClasses.destinationDir),fileTree(processResources.destinationDir).matching({pattern -> pattern.include('**/META-INF/persistence.xml')})
+   outputs.dir sourceSets.main.output.classesDir
+}
+weaveJpaEntities.dependsOn copyPersistentClasses
+classes.dependsOn processDdl,copyNonPersistentClasses,weaveJpaEntities
+
+
+// local jetty run
+ 
+task deployOnLocalJetty(type: JavaExec, dependsOn: assemble) {
+   classpath configurations.jettyRunner.incoming.files
+   main = '-jar'
+   args configurations.jettyRunner.incoming.files.asFileTree.matching({pattern -> pattern.include('**/jetty-runner*.jar')}).singleFile.absolutePath
+   configurations.jettyRuntimeClasspath.incoming.files.asFileTree.visit({
+      fileDetails -> args '--jar'; args fileDetails.file.absolutePath
+   })
+   args '--stop-port'
+   args '8181'
+   args '--stop-key'
+   args 'abc123'
+   args '--out'
+   args "$buildDir/jetty-output.log"
+   args '--config'
+   args "$buildDir/jetty.xml"
+   args war.archivePath
+   
+   doFirst {
+      copy {
+         from "$rootDir/jetty/jetty.xml"; into "$buildDir"; expand(keystorePath: "$buildDir/key.store")
+      }
+	  copy {
+         from "$rootDir/jetty/key.store"; into "$buildDir"
+      }
+   }
+}
+
+run.dependsOn deployOnLocalJetty
+
+
+// test resources
+
+task processTestDdl(type: Copy) {
+   from "$rootDir/ddl"
+   into processTestResources.destinationDir
+}
+testClasses.dependsOn processTestDdl
+
+
+
+
+/**********************
+ * metamodel generation
+ **********************/
+
+task deleteMetamodel(type: Delete) {
+   delete sourceSets.main.java.matching({pattern -> pattern.include('**/' + entitiesBasePackage.replaceAll('\\.','/') + '/**/*_.java')})
+}
+
+task generateMetamodel(type: JavaCompile, dependsOn: deleteMetamodel) {
+   classpath = configurations.metamodel.incoming.files
+   source sourceSets.main.java.matching({pattern -> pattern.include('**/' + entitiesBasePackage.replaceAll('\\.','/') + '/**')})
+   destinationDir = sourceSets.main.java.getSrcDirs().iterator().next()
+   options.compilerArgs << '-proc:only'
+   options.compilerArgs << '-Aeclipselink.persistencexml=' + "$projectDir/src/main/resources/META-INF/persistence.xml"
+}

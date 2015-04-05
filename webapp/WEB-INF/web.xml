@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
+
+	<display-name>spring-data-test</display-name>
+
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+	</welcome-file-list>
+	
+
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+
+	<listener>
+		<listener-class>test.integration.ApplicationInitializerListener</listener-class>
+	</listener>
+
+
+	<filter>
+		<filter-name>transaction-filter</filter-name>
+		<filter-class>test.integration.TransactionFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>transaction-filter</filter-name>
+		<url-pattern>*.page</url-pattern>
+		<url-pattern>*.action</url-pattern>
+	</filter-mapping>
+
+
+	<servlet>
+		<servlet-name>spring-dispatcher</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>/WEB-INF/controllerContext.xml</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>spring-dispatcher</servlet-name>
+		<url-pattern>*.page</url-pattern>
+		<url-pattern>*.action</url-pattern>
+	</servlet-mapping>
+
+</web-app>
