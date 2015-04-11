@@ -4,11 +4,11 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.ResourceBundleMessageSource;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @Configuration
-@EnableTransactionManagement
 @PropertySource("classpath:application.properties")
+@EnableJpaRepositories(basePackages={"test.repository"})
 public class AppConfiguration {
 
 	private static String[] messageSourceBasenames = { "applicationResources" };

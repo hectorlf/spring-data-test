@@ -10,7 +10,7 @@ import javax.persistence.SequenceGenerator;
 
 @MappedSuperclass
 @Access(AccessType.FIELD)
-@SequenceGenerator(name="jpa_seq")
+@SequenceGenerator(name="jpa_seq",allocationSize=1)
 public abstract class PersistentObject {
 
 	@Id

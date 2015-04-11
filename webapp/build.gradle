@@ -27,6 +27,7 @@ dependencies {
    compile 'org.springframework:spring-orm:'
    compile 'org.thymeleaf:thymeleaf-spring4:'
    compile 'org.eclipse.persistence:org.eclipse.persistence.jpa:'
+   compile 'org.springframework.data:spring-data-jpa'
     
    runtime 'org.apache.bval:bval-jsr303:'
    runtime 'org.aspectj:aspectjweaver:'
