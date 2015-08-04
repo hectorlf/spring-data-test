@@ -7,7 +7,7 @@ import org.springframework.orm.jpa.JpaSystemException;
 import test.model.Message;
 import test.repository.MessageRepository;
 
-public class RepositoryTests extends BaseRepositoryTest {
+public class JpaRepositoryTests extends BaseRepositoryTest {
 
 	@Autowired
 	private MessageRepository messageRepository;
