@@ -4,7 +4,7 @@ apply plugin: 'eclipse-wtp'
 
 // project defs
 
-def entitiesBasePackage = 'basearch.model'
+def entitiesBasePackage = 'test.model'
 
 
 configurations {

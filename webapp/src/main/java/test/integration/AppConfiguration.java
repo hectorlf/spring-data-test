@@ -5,10 +5,12 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
 @Configuration
 @PropertySource("classpath:application.properties")
 @EnableJpaRepositories(basePackages={"test.repository"})
+@EnableMongoRepositories(basePackages={"test.repository"})
 public class AppConfiguration {
 
 	private static String[] messageSourceBasenames = { "applicationResources" };
