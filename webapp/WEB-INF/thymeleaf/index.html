@@ -8,5 +8,19 @@
 </head>
 <body>
 	<h1>Spring Data test</h1>
+	<h2>Important messages</h2>
+	<div>
+		<ul>
+			<li th:each="m : ${messages}" th:text="${m.subject} + ' - ' + ${m.text}"></li>
+		</ul>
+		<form th:action="@{/newMessage.action}"><input type="submit" value="New message"/></form>
+	</div>
+	<h2>Posts</h2>
+	<div>
+		<ul>
+			<li th:each="p : ${posts}" th:text="${p.title} + ' - ' + ${p.content}"></li>
+		</ul>
+		<form th:action="@{/newPost.action}"><input type="submit" value="New post"/></form>
+	</div>
 </body>
 </html>

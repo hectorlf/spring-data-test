@@ -2,6 +2,9 @@ package test.integration;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.ViewResolver;
+import org.springframework.web.servlet.view.AbstractUrlBasedView;
+import org.springframework.web.servlet.view.UrlBasedViewResolver;
 import org.thymeleaf.spring4.SpringTemplateEngine;
 import org.thymeleaf.spring4.view.ThymeleafViewResolver;
 import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
@@ -25,11 +28,19 @@ public class ThymeleafConfiguration {
 	}
 
 	@Bean
-	public ThymeleafViewResolver viewResolver() {
+	public ViewResolver thymeleafViewResolver() {
 		ThymeleafViewResolver viewResolver = new ThymeleafViewResolver();
 		viewResolver.setTemplateEngine(templateEngine());
 		viewResolver.setOrder(1);
 		viewResolver.setViewNames(new String[] {"*.html"});
+		return viewResolver;
+	}
+
+	@Bean
+	public ViewResolver defaultViewResolver() {
+		UrlBasedViewResolver viewResolver = new UrlBasedViewResolver();
+		viewResolver.setViewClass(AbstractUrlBasedView.class);
+		viewResolver.setOrder(2);
 		return viewResolver;
 	}
 

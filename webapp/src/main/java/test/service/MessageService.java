@@ -10,4 +10,6 @@ public interface MessageService {
 	
 	List<Message> findImportantMessages();
 
+	void createImportantMessage();
+
 }

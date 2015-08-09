@@ -25,4 +25,13 @@ public class PostServiceImpl implements PostService {
 		return postRepository.findByCreationDateLessThanEqual(System.currentTimeMillis() - 30*24*60*60*1000);
 	}
 
+	@Override
+	public void createPost() {
+		Post p = new Post();
+		p.setContent("Blablabla mumble mumble mumble my my my kthxbye");
+		p.setCreationDate(System.currentTimeMillis());
+		p.setTitle("Post nº" + System.currentTimeMillis());
+		postRepository.save(p);
+	}
+
 }

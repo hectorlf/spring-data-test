@@ -10,4 +10,6 @@ public interface PostService {
 	
 	List<Post> findLatestPosts();
 
+	void createPost();
+
 }

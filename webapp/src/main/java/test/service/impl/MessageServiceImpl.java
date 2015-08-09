@@ -29,4 +29,13 @@ public class MessageServiceImpl implements MessageService {
 		this.messageRepository = messageRepository;
 	}
 
+	@Override
+	public void createImportantMessage() {
+		Message m = new Message();
+		m.setSubject("Important");
+		m.setText("Message you need to read nº " + System.currentTimeMillis());
+		m.setType(Message.MAIL_MESSAGE_TYPE);
+		messageRepository.save(m);
+	}
+
 }

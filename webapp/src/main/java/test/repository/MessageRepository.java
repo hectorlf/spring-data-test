@@ -13,7 +13,7 @@ public interface MessageRepository extends JpaRepository<Message, Long> {
 
 	Integer countByType(Integer type);
 
-	@Query("select m from Message m where m.subject like %?1")
+	@Query("select m from Message m where m.subject like ?1%")
 	List<Message> findBySubject(String subject);
 
 }
