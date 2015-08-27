@@ -1,23 +1,47 @@
 package test.test;
 
-import java.util.ArrayList;
-
-import org.mockito.Mockito;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.dao.DataAccessException;
+import org.springframework.dao.support.PersistenceExceptionTranslator;
+import org.springframework.data.mongodb.MongoDbFactory;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
-import test.model.Post;
-import test.repository.PostRepository;
+import com.github.fakemongo.Fongo;
+import com.mongodb.DB;
 
 @Configuration
+@EnableMongoRepositories(basePackages={"test.repository"})
 public class MongoRepositoryConfig {
 
-	@Bean
-	public PostRepository postRepository() {
-		PostRepository impl = Mockito.mock(PostRepository.class);
-		Mockito.when(impl.count()).thenReturn(Long.valueOf(0));
-		Mockito.when(impl.findByCreationDateLessThanEqual(0)).thenReturn(new ArrayList<Post>());
-		return impl;
+	public @Bean MongoDbFactory mongoDbFactory() throws Exception {
+		return new FongoDbFactory();
+	}
+
+	public @Bean MongoTemplate mongoTemplate() throws Exception {
+		return new MongoTemplate(mongoDbFactory());
+	}
+	
+	private static class FongoDbFactory implements MongoDbFactory {
+
+		private Fongo fongo = new Fongo("localhost");
+
+		@Override
+		public DB getDb() throws DataAccessException {
+			return fongo.getDB("db");
+		}
+
+		@Override
+		public DB getDb(String database) throws DataAccessException {
+			return fongo.getDB(database);
+		}
+
+		@Override
+		public PersistenceExceptionTranslator getExceptionTranslator() {
+			return null;
+		}
+		
 	}
 
 }

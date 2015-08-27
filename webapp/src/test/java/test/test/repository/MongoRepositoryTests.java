@@ -25,10 +25,22 @@ public class MongoRepositoryTests {
 		Assert.assertTrue(postRepository.count() == 0);
 	}
 
-	public void testConstraintViolation1() {
+	public void testFind1() {
 		List<Post> results = postRepository.findByCreationDateLessThanEqual(0);
 		Assert.assertNotNull(results);
 		Assert.assertTrue(results.size() == 0);
+	}
+	
+	public void testCreation() {
+		Post p = new Post();
+		p.setContent("bla");
+		p.setCreationDate(System.currentTimeMillis());
+		p.setTitle("bla");
+		postRepository.save(p);
+		Assert.assertTrue(postRepository.count() == 1);
+		List<Post> results = postRepository.findByCreationDateLessThanEqual(10000);
+		Assert.assertNotNull(results);
+		Assert.assertTrue(results.size() == 1);
 	}
 
 }

@@ -1,5 +1,8 @@
 package test.test;
 
+import java.util.ArrayList;
+
+import org.mockito.Mockito;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -8,6 +11,11 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.thymeleaf.spring4.SpringTemplateEngine;
 import org.thymeleaf.spring4.view.ThymeleafViewResolver;
 import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
+
+import test.model.Message;
+import test.model.Post;
+import test.service.MessageService;
+import test.service.PostService;
 
 @Configuration
 @EnableWebMvc
@@ -46,6 +54,22 @@ public class MvcConfig {
 		viewResolver.setOrder(1);
 		viewResolver.setViewNames(new String[] {"*.html"});
 		return viewResolver;
+	}
+
+	// service mocks
+
+	@Bean
+	public MessageService messageService() {
+		MessageService impl = Mockito.mock(MessageService.class);
+		Mockito.when(impl.findImportantMessages()).thenReturn(new ArrayList<Message>(0));
+		return impl;
+	}
+	
+	@Bean
+	public PostService postService() {
+		PostService impl = Mockito.mock(PostService.class);
+		Mockito.when(impl.findLatestPosts()).thenReturn(new ArrayList<Post>(0));
+		return impl;
 	}
 
 }
