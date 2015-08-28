@@ -31,6 +31,8 @@ dependencies {
    compile 'org.thymeleaf:thymeleaf-spring4'
    compile 'org.thymeleaf.extras:thymeleaf-extras-springsecurity4'
    compile 'org.eclipse.persistence:org.eclipse.persistence.jpa'
+   compile 'com.github.fakemongo:fongo:2.0.2'
+   compile 'org.mongodb:mongo-java-driver:3.0.3'
    compile 'org.springframework.data:spring-data-jpa'
    compile 'org.springframework.data:spring-data-mongodb'
     
@@ -41,8 +43,6 @@ dependencies {
    testCompile 'org.springframework:spring-test'
    testCompile 'org.hsqldb:hsqldb'
    testCompile 'org.mockito:mockito-core'
-   testCompile 'com.github.fakemongo:fongo:2.0.2'
-   testCompile 'org.mongodb:mongo-java-driver:3.0.3'
 
    weave 'org.eclipse.persistence:javax.persistence'
    weave 'org.eclipse.persistence:org.eclipse.persistence.jpa'
