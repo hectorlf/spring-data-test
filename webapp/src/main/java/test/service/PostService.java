@@ -2,7 +2,7 @@ package test.service;
 
 import java.util.List;
 
-import test.model.Post;
+import test.model.mongo.Post;
 
 public interface PostService {
 

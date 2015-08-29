@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
-import test.model.Post;
+import test.model.mongo.Post;
 
 @Repository
 public interface PostRepository extends MongoRepository<Post, String> {

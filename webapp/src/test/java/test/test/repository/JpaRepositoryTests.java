@@ -4,7 +4,7 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.jpa.JpaSystemException;
 
-import test.model.Message;
+import test.model.jpa.Message;
 import test.repository.MessageRepository;
 
 public class JpaRepositoryTests extends BaseRepositoryTest {

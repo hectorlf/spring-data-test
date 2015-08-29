@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import test.model.Message;
+import test.model.jpa.Message;
 import test.repository.MessageRepository;
 import test.service.MessageService;
 

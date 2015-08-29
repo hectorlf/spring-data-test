@@ -12,8 +12,8 @@ import org.thymeleaf.spring4.SpringTemplateEngine;
 import org.thymeleaf.spring4.view.ThymeleafViewResolver;
 import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
 
-import test.model.Message;
-import test.model.Post;
+import test.model.jpa.Message;
+import test.model.mongo.Post;
 import test.service.MessageService;
 import test.service.PostService;
 

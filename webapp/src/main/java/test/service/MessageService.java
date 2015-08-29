@@ -2,7 +2,7 @@ package test.service;
 
 import java.util.List;
 
-import test.model.Message;
+import test.model.jpa.Message;
 
 public interface MessageService {
 

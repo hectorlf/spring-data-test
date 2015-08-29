@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import test.model.Post;
+import test.model.mongo.Post;
 import test.repository.PostRepository;
 import test.test.MongoRepositoryConfig;
 

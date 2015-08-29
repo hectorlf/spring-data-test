@@ -7,8 +7,8 @@
         
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
         
-        <class>test.model.PersistentObject</class>
-        <class>test.model.Message</class>
+        <class>test.model.jpa.PersistentObject</class>
+        <class>test.model.jpa.Message</class>
         
         <properties>
 	        <property name="eclipselink.weaving" value="static"/>
