@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import test.model.mongo.Post;
-import test.repository.PostRepository;
+import test.repository.mongo.PostRepository;
 import test.service.PostService;
 
 @Service("postService")

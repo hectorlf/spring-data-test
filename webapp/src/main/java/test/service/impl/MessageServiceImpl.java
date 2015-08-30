@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import test.model.jpa.Message;
-import test.repository.MessageRepository;
+import test.repository.jpa.MessageRepository;
 import test.service.MessageService;
 
 @Service("messageService")

@@ -10,7 +10,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import test.model.mongo.Post;
-import test.repository.PostRepository;
+import test.repository.mongo.PostRepository;
 import test.test.MongoRepositoryConfig;
 
 @RunWith(SpringJUnit4ClassRunner.class)

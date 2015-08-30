@@ -1,4 +1,4 @@
-package test.repository;
+package test.repository.jpa;
 
 import java.util.List;
 

@@ -35,6 +35,7 @@ dependencies {
    compile 'org.mongodb:mongo-java-driver:3.0.3'
    compile 'org.springframework.data:spring-data-jpa'
    compile 'org.springframework.data:spring-data-mongodb'
+   compile 'org.springframework.data:spring-data-neo4j'
     
    runtime 'org.apache.bval:bval-jsr303'
    runtime 'org.aspectj:aspectjweaver'
