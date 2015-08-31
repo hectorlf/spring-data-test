@@ -22,5 +22,17 @@
 		</ul>
 		<form th:action="@{/newPost.action}"><input type="submit" value="New post"/></form>
 	</div>
+	<h2>Movies</h2>
+	<div>
+		<ul>
+			<li th:each="m : ${movies}">
+				<span th:text="${m.title}"></span>
+				<ul>
+					<li th:each="a : ${m.cast}" th:text="${a.name}"></li>
+				</ul>
+			</li>
+		</ul>
+		<form th:action="@{/newMovie.action}"><input type="submit" value="New movie"/></form>
+	</div>
 </body>
 </html>

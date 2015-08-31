@@ -8,6 +8,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import test.service.MessageService;
+import test.service.MovieService;
 import test.service.PostService;
 
 @Controller
@@ -19,12 +20,15 @@ public class IndexController {
 	private MessageService messageService;
 	@Autowired
 	private PostService postService;
+	@Autowired
+	private MovieService movieService;
 	
 	@RequestMapping(value="/index.page")
 	public String welcome(ModelMap model) {
 		logger.debug("Going into IndexController.welcome()");
 		model.addAttribute("messages", messageService.findImportantMessages());
 		model.addAttribute("posts", postService.findLatestPosts());
+		model.addAttribute("movies", movieService.findTestMovies());
 		return "/index.html";
 	}
 
@@ -39,6 +43,13 @@ public class IndexController {
 	public String newPost(ModelMap model) {
 		logger.debug("Going into IndexController.newPost()");
 		postService.createPost();
+		return "redirect:/index.page";
+	}
+	
+	@RequestMapping(value="/newMovie.action")
+	public String newMovie(ModelMap model) {
+		logger.debug("Going into IndexController.newMovie()");
+		movieService.createTestMovie();
 		return "redirect:/index.page";
 	}
 

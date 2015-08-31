@@ -13,7 +13,7 @@ public interface MovieRepository extends GraphRepository<Movie> {
 
 	List<Movie> findByTitle(String title);
 	
-	@Query("match (movie:Movie)<-[:ACTS_IN]-(actor:Actor) where actor.name = {name} return movie")
+	@Query("match (movie:Movie)<-[:ACTS_IN]-(actor:Actor) where actor.name = {0} return movie")
 	Iterable<Movie> findMoviesByActor(String name);
 
 }
