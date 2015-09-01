@@ -14,7 +14,9 @@ import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
 
 import test.model.jpa.Message;
 import test.model.mongo.Post;
+import test.model.neo4j.Movie;
 import test.service.MessageService;
+import test.service.MovieService;
 import test.service.PostService;
 
 @Configuration
@@ -69,6 +71,13 @@ public class MvcConfig {
 	public PostService postService() {
 		PostService impl = Mockito.mock(PostService.class);
 		Mockito.when(impl.findLatestPosts()).thenReturn(new ArrayList<Post>(0));
+		return impl;
+	}
+
+	@Bean
+	public MovieService movieService() {
+		MovieService impl = Mockito.mock(MovieService.class);
+		Mockito.when(impl.findTestMovies()).thenReturn(new ArrayList<Movie>(0));
 		return impl;
 	}
 
