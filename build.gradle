@@ -11,10 +11,10 @@ subprojects {
    repositories {
       mavenCentral()
       flatDir { dirs '../lib' }
-	  maven {
-		  url 'http://repo.spring.io/milestone'
-		  url 'http://m2.neo4j.org/content/repositories/releases'
-	  }
+      maven {
+         url 'http://repo.spring.io/milestone'
+         url 'http://m2.neo4j.org/content/repositories/releases'
+      }
    }
 
    dependencies {
