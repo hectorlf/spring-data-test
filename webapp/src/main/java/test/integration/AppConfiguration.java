@@ -6,13 +6,13 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
-import org.springframework.data.neo4j.config.EnableNeo4jRepositories;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
 @PropertySource("classpath:application.properties")
+@EnableTransactionManagement
 @EnableJpaRepositories(basePackages={"test.repository.jpa"})
 @EnableMongoRepositories(basePackages={"test.repository.mongo"})
-@EnableNeo4jRepositories(basePackages={"test.repository.neo4j"})
 public class AppConfiguration {
 
 	private static String[] messageSourceBasenames = { "applicationResources" };

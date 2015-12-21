@@ -30,7 +30,7 @@ public class PostServiceImpl implements PostService {
 		Post p = new Post();
 		p.setContent("Blablabla mumble mumble mumble my my my kthxbye");
 		p.setCreationDate(System.currentTimeMillis());
-		p.setTitle("Post nº" + System.currentTimeMillis());
+		p.setTitle("Post number " + System.currentTimeMillis());
 		postRepository.save(p);
 	}
 
