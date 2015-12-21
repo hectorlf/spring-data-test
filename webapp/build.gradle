@@ -31,8 +31,8 @@ dependencies {
    compile 'org.thymeleaf:thymeleaf-spring4'
    compile 'org.thymeleaf.extras:thymeleaf-extras-springsecurity4'
    compile 'org.eclipse.persistence:org.eclipse.persistence.jpa'
-   compile 'com.github.fakemongo:fongo:2.0.2'
-   compile 'org.mongodb:mongo-java-driver:3.0.3'
+   compile 'com.github.fakemongo:fongo:2.0.4'
+   compile 'org.mongodb:mongo-java-driver:3.2.0'
    compile 'org.springframework.data:spring-data-jpa'
    compile 'org.springframework.data:spring-data-mongodb'
    compile 'org.springframework.data:spring-data-neo4j'
@@ -54,7 +54,7 @@ dependencies {
    metamodel 'org.springframework.security:spring-security-core'
    
    jettyRunner 'org.eclipse.jetty:jetty-runner:9.2.10.v20150310'
-   jettyRuntimeClasspath 'org.apache.commons:commons-dbcp2:2.1'
+   jettyRuntimeClasspath 'org.apache.commons:commons-dbcp2:2.1.1'
    jettyRuntimeClasspath 'org.hsqldb:hsqldb'
 }
 
