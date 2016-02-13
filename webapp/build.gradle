@@ -36,10 +36,8 @@ dependencies {
    compile 'org.springframework.data:spring-data-jpa'
    compile 'org.springframework.data:spring-data-mongodb'
    compile 'org.springframework.data:spring-data-neo4j'
-   compile 'org.neo4j.test:neo4j-harness:2.2.5'
    
    runtime 'org.apache.bval:bval-jsr303'
-   runtime 'org.aspectj:aspectjweaver'
 
    testCompile 'junit:junit'
    testCompile 'org.springframework:spring-test'

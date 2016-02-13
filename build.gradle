@@ -45,7 +45,6 @@ subprojects {
          substitute module('org.thymeleaf:thymeleaf-spring4') with module('org.thymeleaf:thymeleaf-spring4:2.1.4.RELEASE')
          substitute module('org.thymeleaf.extras:thymeleaf-extras-springsecurity4') with module('org.thymeleaf.extras:thymeleaf-extras-springsecurity4:2.1.2.RELEASE')
          substitute module('org.apache.bval:bval-jsr303') with module('org.apache.bval:bval-jsr303:0.5')
-         substitute module('org.aspectj:aspectjweaver') with module('org.aspectj:aspectjweaver:1.8.5')
          substitute module('junit:junit') with module('junit:junit:4.12')
          substitute module('org.mockito:mockito-core') with module('org.mockito:mockito-core:2.0.12-beta')
       }
