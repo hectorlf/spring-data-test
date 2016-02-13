@@ -13,6 +13,8 @@ subprojects {
       flatDir { dirs '../lib' }
       maven {
          url 'http://repo.spring.io/milestone'
+      }
+      maven {
          url 'http://m2.neo4j.org/content/repositories/releases'
       }
    }
@@ -37,9 +39,9 @@ subprojects {
          substitute module('org.springframework.security:spring-security-core') with module('org.springframework.security:spring-security-core:4.0.3.RELEASE')
          substitute module('org.springframework.security:spring-security-web') with module('org.springframework.security:spring-security-web:4.0.3.RELEASE')
          substitute module('org.springframework.security:spring-security-config') with module('org.springframework.security:spring-security-config:4.0.3.RELEASE')
-         substitute module('org.springframework.data:spring-data-jpa') with module('org.springframework.data:spring-data-jpa:1.9.2.RELEASE')
-         substitute module('org.springframework.data:spring-data-mongodb') with module('org.springframework.data:spring-data-mongodb:1.8.2.RELEASE')
-         substitute module('org.springframework.data:spring-data-neo4j') with module('org.springframework.data:spring-data-neo4j:4.0.0.RELEASE')
+         substitute module('org.springframework.data:spring-data-jpa') with module('org.springframework.data:spring-data-jpa:1.10.0.M1')
+         substitute module('org.springframework.data:spring-data-mongodb') with module('org.springframework.data:spring-data-mongodb:1.9.0.M1')
+         substitute module('org.springframework.data:spring-data-neo4j') with module('org.springframework.data:spring-data-neo4j:4.1.0.M1')
          substitute module('org.thymeleaf:thymeleaf-spring4') with module('org.thymeleaf:thymeleaf-spring4:2.1.4.RELEASE')
          substitute module('org.thymeleaf.extras:thymeleaf-extras-springsecurity4') with module('org.thymeleaf.extras:thymeleaf-extras-springsecurity4:2.1.2.RELEASE')
          substitute module('org.apache.bval:bval-jsr303') with module('org.apache.bval:bval-jsr303:0.5')
