@@ -33,6 +33,7 @@ dependencies {
    compile 'org.eclipse.persistence:org.eclipse.persistence.jpa'
    compile 'com.github.fakemongo:fongo:2.0.4'
    compile 'org.mongodb:mongo-java-driver:3.2.0'
+   compile 'org.neo4j:neo4j-ogm-embedded-driver:2.0.1'
    compile 'org.springframework.data:spring-data-jpa'
    compile 'org.springframework.data:spring-data-mongodb'
    compile 'org.springframework.data:spring-data-neo4j'
